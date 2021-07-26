@@ -9,7 +9,7 @@ export const fetchProducts = () => {
   return async dispatch => {
     // any async code you want!
     const response = await fetch(
-      'https://rn-complete-guide.firebaseio.com/products.json'
+      'https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/products.json'
     );
 
     const resData = await response.json();
@@ -41,7 +41,7 @@ export const createProduct = (title, description, imageUrl, price) => {
   return async dispatch => {
     // any async code you want!
     const response = await fetch(
-      'https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/products.json',
+      'https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/products.json',
       {
         method: 'POST',
         headers: {
