@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, Button, Platform } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
@@ -6,11 +6,16 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/UI/HeaderButton';
 import ProductItem from '../../components/shop/ProductItem';
 import * as cartActions from '../../store/actions/cart';
+import * as productsActions from '../../store/actions/products';
 import Colors from '../../constants/Colors';
 
-const ProductsOverviewScreen = props => {
+const ProductOverviewScreen = props => {
   const products = useSelector(state => state.products.availableProducts);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(productsActions.fetchProducts());
+  }, [dispatch]);
 
   const selectItemHandler = (id, title) => {
     props.navigation.navigate('ProductDetail', {
@@ -52,7 +57,7 @@ const ProductsOverviewScreen = props => {
   );
 };
 
-ProductsOverviewScreen.navigationOptions = navData => {
+ProductOverviewScreen.navigationOptions = navData => {
   return {
     headerTitle: 'All Products',
     headerLeft: (
@@ -80,4 +85,4 @@ ProductsOverviewScreen.navigationOptions = navData => {
   };
 };
 
-export default ProductsOverviewScreen;
+export default ProductOverviewScreen;
