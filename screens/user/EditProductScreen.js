@@ -63,12 +63,12 @@ const EditProductScreen = props => {
   });
 
   const submitHandler = useCallback(() => {
-    if (!formState.formIsValid) {
-      Alert.alert('Wrong input!', 'Please check the errors in the form.', [
-        { text: 'Okay' }
-      ]);
-      return;
-    }
+    // if (!formState.formIsValid) {
+    //   Alert.alert('Wrong input!', 'Please check the errors in the form.', [
+    //     { text: 'Okay' }
+    //   ]);
+    //   return;
+    // }
     if (editedProduct) {
       dispatch(
         productsActions.updateProduct(
@@ -129,6 +129,17 @@ const EditProductScreen = props => {
             required
           />
           <Input
+            id="imageUrl"
+            label="Image Url"
+            errorText="Please enter a valid image url!"
+            keyboardType="default"
+            returnKeyType="next"
+            onInputChange={inputChangeHandler}
+            initialValue={editedProduct ? editedProduct.imageUrl : ''}
+            initiallyValid={!!editedProduct}
+            required
+          />
+            <Input
             id="imageUrl"
             label="Image Url"
             errorText="Please enter a valid image url!"
