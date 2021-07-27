@@ -10,7 +10,7 @@ export const fetchProducts = () => {
     // any async code you want!
     try {
       const response = await fetch(
-        'https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/products.json'
+        'https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/products.json'
       );
 
       if (!response.ok) {
@@ -28,7 +28,7 @@ export const fetchProducts = () => {
             resData[key].title,
             resData[key].imageUrl,
             resData[key].description,
-            resData[key].price
+            // resData[key].price
           )
         );
       }
@@ -42,14 +42,25 @@ export const fetchProducts = () => {
 };
 
 export const deleteProduct = productId => {
-  return { type: DELETE_PRODUCT, pid: productId };
+  return async dispatch => {
+    const responce =await fetch(
+      `https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/products/${productId}.json`,
+      {
+        method: 'DELETE'
+      }
+    );
+    if(!response.ok){
+      throw new Error('Something went wrong!');
+    }
+    dispatch({ type: DELETE_PRODUCT, pid: productId });
+  };
 };
 
-export const createProduct = (title, description, imageUrl, price) => {
+export const createProduct = (title, description, imageUrl) => {
   return async dispatch => {
     // any async code you want!
     const response = await fetch(
-      'https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/products.json',
+      'https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/products.json',
       {
         method: 'POST',
         headers: {
@@ -59,7 +70,7 @@ export const createProduct = (title, description, imageUrl, price) => {
           title,
           description,
           imageUrl,
-          price
+         
         })
       }
     );
@@ -73,20 +84,44 @@ export const createProduct = (title, description, imageUrl, price) => {
         title,
         description,
         imageUrl,
-        price
+        
       }
     });
   };
 };
 
 export const updateProduct = (id, title, description, imageUrl) => {
-  return {
-    type: UPDATE_PRODUCT,
-    pid: id,
-    productData: {
-      title,
-      description,
-      imageUrl
+  return async dispatch => {
+   const response = await fetch(
+      `https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/products/${id}.json`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title,
+          description,
+          imageUrl
+        })
+      }
+    );
+
+    if(!response.ok){
+      throw new Error('Something went wrong!');
     }
+
+
+
+
+    dispatch({
+      type: UPDATE_PRODUCT,
+      pid: id,
+      productData: {
+        title,
+        description,
+        imageUrl
+      }
+    });
   };
 };

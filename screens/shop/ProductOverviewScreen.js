@@ -6,7 +6,7 @@ import {
   Button,
   Platform,
   ActivityIndicator,
-  StyleSheet,
+  StyleSheet
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
@@ -33,6 +33,17 @@ const ProductsOverviewScreen = props => {
     }
     setIsLoading(false);
   }, [dispatch, setIsLoading, setError]);
+
+  useEffect(() => {
+    const willFocusSub = props.navigation.addListener(
+      'willFocus',
+      loadProducts
+    );
+
+    return () => {
+      willFocusSub.remove();
+    };
+  }, [loadProducts]);
 
   useEffect(() => {
     loadProducts();
@@ -82,7 +93,7 @@ const ProductsOverviewScreen = props => {
         <ProductItem
           image={itemData.item.imageUrl}
           title={itemData.item.title}
-          price={itemData.item.price}
+          // price={itemData.item.price}
           onSelect={() => {
             selectItemHandler(itemData.item.id, itemData.item.title);
           }}
