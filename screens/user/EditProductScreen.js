@@ -51,13 +51,13 @@ const EditProductScreen = props => {
       title: editedProduct ? editedProduct.title : '',
       imageUrl: editedProduct ? editedProduct.imageUrl : '',
       description: editedProduct ? editedProduct.description : '',
-      price: ''
+      // price: ''
     },
     inputValidities: {
       title: editedProduct ? true : false,
       imageUrl: editedProduct ? true : false,
       description: editedProduct ? true : false,
-      price: editedProduct ? true : false
+      // price: editedProduct ? true : false
     },
     formIsValid: editedProduct ? true : false
   });
@@ -84,7 +84,7 @@ const EditProductScreen = props => {
           formState.inputValues.title,
           formState.inputValues.description,
           formState.inputValues.imageUrl,
-          +formState.inputValues.price
+          // +formState.inputValues.price
         )
       );
     }
@@ -140,7 +140,7 @@ const EditProductScreen = props => {
             required
           />
           
-          {editedProduct ? null : (
+          {/* {editedProduct ? null : (
             <Input
               id="price"
               label="Price"
@@ -151,7 +151,7 @@ const EditProductScreen = props => {
               required
               min={0.1}
             />
-          )}
+          )} */}
           <Input
             id="description"
             label="Description"

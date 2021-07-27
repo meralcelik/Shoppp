@@ -9,7 +9,7 @@ export const fetchProducts = () => {
   return async dispatch => {
     // any async code you want!
     const response = await fetch(
-      'https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/products.json'
+      'https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/products.json'
     );
 
     const resData = await response.json();
@@ -23,7 +23,7 @@ export const fetchProducts = () => {
           resData[key].title,
           resData[key].imageUrl,
           resData[key].description,
-          resData[key].price
+          // resData[key].price
         )
       );
 
@@ -37,11 +37,11 @@ export const deleteProduct = productId => {
   return { type: DELETE_PRODUCT, pid: productId };
 };
 
-export const createProduct = (title, description, imageUrl, price) => {
+export const createProduct = (title, description, imageUrl) => {
   return async dispatch => {
     // any async code you want!
     const response = await fetch(
-      'https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/products.json',
+      'https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/products.json',
       {
         method: 'POST',
         headers: {
@@ -51,7 +51,7 @@ export const createProduct = (title, description, imageUrl, price) => {
           title,
           description,
           imageUrl,
-          price
+          // price
         })
       }
     );
@@ -65,7 +65,7 @@ export const createProduct = (title, description, imageUrl, price) => {
         title,
         description,
         imageUrl,
-        price
+        // price
       }
     });
   };
