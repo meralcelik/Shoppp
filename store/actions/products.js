@@ -8,28 +8,36 @@ export const SET_PRODUCTS = 'SET_PRODUCTS';
 export const fetchProducts = () => {
   return async dispatch => {
     // any async code you want!
-    const response = await fetch(
-      'https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/products.json'
-    );
-
-    const resData = await response.json();
-    const loadedProducts = [];
-
-    for (const key in resData) {
-      loadedProducts.push(
-        new Product(
-          key,
-          'u1',
-          resData[key].title,
-          resData[key].imageUrl,
-          resData[key].description,
-          // resData[key].price
-        )
+    try {
+      const response = await fetch(
+        'https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/products.json'
       );
 
-    }
+      if (!response.ok) {
+        throw new Error('Something went wrong!');
+      }
 
-    dispatch({ type: SET_PRODUCTS, products: loadedProducts });
+      const resData = await response.json();
+      const loadedProducts = [];
+
+      for (const key in resData) {
+        loadedProducts.push(
+          new Product(
+            key,
+            'u1',
+            resData[key].title,
+            resData[key].imageUrl,
+            resData[key].description,
+            resData[key].price
+          )
+        );
+      }
+
+      dispatch({ type: SET_PRODUCTS, products: loadedProducts });
+    } catch (err) {
+      // send to custom analytics server
+      throw err;
+    }
   };
 };
 
@@ -37,11 +45,11 @@ export const deleteProduct = productId => {
   return { type: DELETE_PRODUCT, pid: productId };
 };
 
-export const createProduct = (title, description, imageUrl) => {
+export const createProduct = (title, description, imageUrl, price) => {
   return async dispatch => {
     // any async code you want!
     const response = await fetch(
-      'https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/products.json',
+      'https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/products.json',
       {
         method: 'POST',
         headers: {
@@ -51,7 +59,7 @@ export const createProduct = (title, description, imageUrl) => {
           title,
           description,
           imageUrl,
-          // price
+          price
         })
       }
     );
@@ -65,7 +73,7 @@ export const createProduct = (title, description, imageUrl) => {
         title,
         description,
         imageUrl,
-        // price
+        price
       }
     });
   };

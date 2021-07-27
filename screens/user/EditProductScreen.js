@@ -119,7 +119,7 @@ const EditProductScreen = props => {
             id="title"
             label="Title"
             errorText="Please enter a valid title!"
-            keyboardType="default"
+            keyboardType="decimal-pad"
             autoCapitalize="sentences"
             autoCorrect
             returnKeyType="next"
@@ -132,7 +132,7 @@ const EditProductScreen = props => {
             id="imageUrl"
             label="Image Url"
             errorText="Please enter a valid image url!"
-            keyboardType="default"
+            keyboardType="decimal-pad"
             returnKeyType="next"
             onInputChange={inputChangeHandler}
             initialValue={editedProduct ? editedProduct.imageUrl : ''}
@@ -156,7 +156,7 @@ const EditProductScreen = props => {
             id="description"
             label="Description"
             errorText="Please enter a valid description!"
-            keyboardType="default"
+            keyboardType="decimal-pad"
             autoCapitalize="sentences"
             autoCorrect
             multiline
