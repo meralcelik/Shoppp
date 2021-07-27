@@ -10,7 +10,7 @@ export const fetchProducts = () => {
     // any async code you want!
     try {
       const response = await fetch(
-        'https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/products.json'
+        'https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/products.json'
       );
 
       if (!response.ok) {
@@ -44,7 +44,7 @@ export const fetchProducts = () => {
 export const deleteProduct = productId => {
   return async dispatch => {
     const responce =await fetch(
-      `https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/products/${productId}.json`,
+      `https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/products/${productId}.json`,
       {
         method: 'DELETE'
       }
@@ -60,7 +60,7 @@ export const createProduct = (title, description, imageUrl) => {
   return async dispatch => {
     // any async code you want!
     const response = await fetch(
-      'https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/products.json',
+      'https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/products.json',
       {
         method: 'POST',
         headers: {
@@ -93,7 +93,7 @@ export const createProduct = (title, description, imageUrl) => {
 export const updateProduct = (id, title, description, imageUrl) => {
   return async dispatch => {
    const response = await fetch(
-      `https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/products/${id}.json`,
+      `https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/products/${id}.json`,
       {
         method: 'PATCH',
         headers: {
