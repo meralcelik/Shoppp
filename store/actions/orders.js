@@ -7,7 +7,7 @@ export const fetchOrders = () => {
   return async dispatch => {
     try {
       const response = await fetch(
-        'https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/orders/u1.json'
+        'https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/orders/u1.json'
       );
 
       if (!response.ok) {
@@ -35,10 +35,11 @@ export const fetchOrders = () => {
 };
 
 export const addOrder = (cartItems, totalAmount) => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
     const date = new Date();
     const response = await fetch(
-      'https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/orders/u1.json',
+      `https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/orders/u1.json?auth=${token}`,
       {
         method: 'POST',
         headers: {

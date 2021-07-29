@@ -10,7 +10,7 @@ export const fetchProducts = () => {
     // any async code you want!
     try {
       const response = await fetch(
-        'https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/products.json'
+        'https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/products.json'
       );
 
       if (!response.ok) {
@@ -24,7 +24,7 @@ export const fetchProducts = () => {
         loadedProducts.push(
           new Product(
             key,
-            'u1',
+            resData[key].ownerId,
             resData[key].title,
             resData[key].imageUrl,
             resData[key].description,
@@ -42,9 +42,10 @@ export const fetchProducts = () => {
 };
 
 export const deleteProduct = productId => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
     const responce =await fetch(
-      `https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/products/${productId}.json`,
+      `https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/products/${productId}.json?auth=${token}`,
       {
         method: 'DELETE'
       }
@@ -57,10 +58,11 @@ export const deleteProduct = productId => {
 };
 
 export const createProduct = (title, description, imageUrl) => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     // any async code you want!
+    const token = getState().auth.token;
     const response = await fetch(
-      'https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/products.json',
+      `https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/products.json?auth=${token}`,
       {
         method: 'POST',
         headers: {
@@ -91,9 +93,10 @@ export const createProduct = (title, description, imageUrl) => {
 };
 
 export const updateProduct = (id, title, description, imageUrl) => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
    const response = await fetch(
-      `https://m-complete-guide-d11e5-default-rtdb.firebaseio.com/products/${id}.json`,
+      `https://reactnativeshopapp-2cd3b-default-rtdb.firebaseio.com/products/${id}.json?auth=${token}`,
       {
         method: 'PATCH',
         headers: {
