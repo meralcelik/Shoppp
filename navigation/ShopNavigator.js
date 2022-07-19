@@ -5,7 +5,6 @@ import {createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { Platform , SafeAreaView, Button, View} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useDispatch } from 'react-redux';
-
 import ProductOverviewScreen from '../screens/shop/ProductOverviewScreen';
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
 import CartScreen from '../screens/shop/CartScreen';
